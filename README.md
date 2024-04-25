@@ -21,7 +21,7 @@ This project is an evaluate generation images from noise of three different meth
 
 The first linear model has three hidden layers with a progressively increasing number of neurons: 256, 512, and 1024. It uses LeakyReLU activation function, which allows for a small, non-zero gradient when the unit is not active. This model does not employ dropout, which means it may be more prone to overfitting compared to a model that does. The output is generated through a single linear layer with Sigmoid activation, which is typical for binary classification. Due to the larger hidden layers, it has more parameters, making it more complex.
 
-for more details , you can access the notebook named "GAN_G_Dense_D_Dense_1.ipynb"
+for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
 <div align="center">
     <img src="GAN/results_GAN/First_dense_model_50_epochs.png" alt="Team Photo" width="150" height="160">
     <img src="GAN/results_GAN/First_dense_model_100_epochs.png" alt="Team Photo" width="150" height="160">
