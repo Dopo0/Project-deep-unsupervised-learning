@@ -1,14 +1,17 @@
 # Project deep unsupervised learning
 This project is an evaluate generation images from noise of three different methods
-....
 
-# Table of contents
-1. GMM
-2. AE
+
+## Table of contents
+1. VAE (Variational Autoencoders)
    1. Methodology
    2. Results
    3. Conclusions
-4. GAN
+2. GMMs (Gaussian Mixture Models)
+   1. Pure GMM
+   2. AE and GMM
+   3. VAEs and GMM
+3. GAN (Generative adversarial network)
    1. [First dense model](#First dense model)
    2. [Second dense model](#Second dense model)
    3. [CNN model](#CNN model)
@@ -85,6 +88,59 @@ The results suggest that convolutional architecture is more suitable for image g
   <br>
   <em>Figure: Results of the CNN model from random noise on Fashion MNIST dataset after 15 epochs</em>
 </div>
+
+## GMMs
+
+### Pure GMM 
+Initially, the approach involved setting the number of components in the GMM equal to the number of distinct labels in the FashionMNIST dataset. This method yielded relatively accurate results; however, it failed to capture all the distinct classes present in the dataset. Notably, some classes, such as t-shirts, were repeated, indicating a limitation in the model's capacity to differentiate between similar categories.
+for more details , you can access the notebook named ["GMMS.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+
+
+<div align="center">
+  <img src="GMMs/results/GMMs_10_Comp.png" alt="Results pure GMM" width="250" height="260">
+  <br>
+  <em>Figure: Results of pure GMMs with 10 components on Fashion MNIST dataset after 150 epochs</em>
+</div>
+
+### AE and GMM
+
+This second approach combines the power of autoencoders (AE) and Gaussian Mixture Models (GMMs) to generate synthetic images resembling the FashionMNIST dataset. The process starts with training a convolutional autoencoder (CAE) on the FashionMNIST dataset, aiming to learn a compact representation of the input images in a latent space. The trained CAE's encoder part is then utilized to extract latent vectors from the FashionMNIST dataset. Subsequently, a range of components for the GMM is explored, evaluating the Bayesian Information Criterion (BIC) score for each component count to determine the optimal number of clusters. This step is crucial for selecting the most suitable configuration of the GMM for capturing the underlying distribution of the latent vectors effectively.
+for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+<div align="center">
+  <img src="GMMs/results/AE_training_epochs.png" alt="Loss over epochs" width="250" height="260">
+  <img src="GMMs/results/best_componet.png" alt="BIC scores" width="250" height="260">
+  <br>
+  <em>Figure: left: Loss over epochs AE, Right: BIC scores GMMs from 1 to 20 components</em>
+</div>
+
+After identifying the optimal number of components, in this case, 18, the GMM is trained on the latent vectors. Following GMM training, samples are drawn from the learned distribution, effectively generating synthetic latent vectors. These latent vectors are then passed through the decoder part of the CAE to reconstruct corresponding synthetic images. Finally, the generated images are visualized to assess the quality and diversity of the synthetic samples. This approach leverages the representation power of CAEs to learn meaningful latent representations and employs GMMs to capture the complex distribution of these latent vectors, culminating in the generation of synthetic images that closely resemble the FashionMNIST dataset. Through visual inspection of the generated images, the effectiveness of the AE-GMM framework in producing realistic synthetic data can be evaluated and compared against the original dataset.
+
+<div align="center">
+  <img src="GMMs/results/AE_GMMs_2_Comp.png" alt="AE_GMMs_2_Comp.png" width="250" height="260">
+  <img src="GMMs/results/AE_GMMs_11_Comp.png" alt="AE_GMMs_11_Comp.png" width="250" height="260">
+  <img src="GMMs/results/AE_GMMs_18_Comp.png" alt="AE_GMMs_18_Comp.png" width="250" height="260">
+  <br>
+  <em>Figure: Results from 2, 11, and 18 components on AE+GMM model</em>
+</div>
+
+### VAEs and GMM
+
+we maintain the essence of the previous strategy, but instead of using a standard autoencoder (AE), we adopt a Variational Autoencoder (VAE). VAEs offer a probabilistic interpretation of latent space by modeling the latent variables as probability distributions. This probabilistic framework allows for more flexible and robust latent space representations, potentially resulting in improved generation quality and diversity compared to traditional autoencoders.
+
+The workflow remains largely consistent with the previous approach. First, we train a Variational Autoencoder on the FashionMNIST dataset to learn a compact and structured latent representation. Unlike conventional autoencoders, VAEs learn to encode data into latent variables that follow a predefined probability distribution, typically a Gaussian distribution. Consequently, the latent space captures both the mean and variance of each latent variable, enabling more nuanced and expressive representations of the input data.
+
+we sample latent vectors from the learned distribution of the GMM and decode them using the decoder portion of the VAE to generate synthetic images. This process capitalizes on the probabilistic nature of VAEs to sample latent vectors that capture the underlying data distribution more accurately, potentially leading to higher-quality synthetic images. Finally, we visualize the generated images to assess their fidelity and diversity, enabling a comparative analysis with the original FashionMNIST dataset.
+
+<div align="center">
+  <img src="GMMs/results/VAEs_GMMs_2_Comp.png" alt="VAEs_GMMs_2_Comp.png" width="250" height="260">
+  <img src="GMMs/results/VAEs_GMMs_11_Comp.png" alt="VAEs_GMMs_11_Comp.png" width="250" height="260">
+  <img src="GMMs/results/VAEs_GMMs_18_Comp.png" alt="VAEs_GMMs_18_Comp.png" width="250" height="260">
+  <br>
+  <em>Figure: Results from 2, 11, and 18 components on VAEs+GMM model</em>
+</div>
+
+Overall, by incorporating Variational Autoencoders into the generation pipeline, we aim to enhance the quality and diversity of the generated images while maintaining the interpretability and structure of the latent space. This approach represents a sophisticated fusion of generative modeling techniques, leveraging the strengths of both VAEs and GMMs to generate realistic synthetic data resembling the FashionMNIST dataset.
+for more details , you can access the notebook named ["VAEs CNN GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
 
 
 
