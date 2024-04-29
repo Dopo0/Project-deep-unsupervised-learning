@@ -4,30 +4,29 @@ This project is an evaluate generation images from noise of three different meth
 
 ## Table of contents
 1. [VAE (Variational Autoencoders)](#VAE)
-   1. [Methodology](#Methodology)
-   2. Results
-   3. Conclusions
-2. GMMs (Gaussian Mixture Models)
-   1. Pure GMM
-   2. AE and GMM
-   3. VAEs and GMM
-3. GAN (Generative adversarial network)
-   1. [First dense model](#First dense model)
-   2. [Second dense model](#Second dense model)
-   3. [CNN model](#CNN model)
-   4. [CNN model for discriminator and dense model for the generator](#CNN model for discriminator and dense model for the generator)
-
+   1. [Methodology](#VAE11)
+   2. [Results](#VAE12)
+   3. [Conclusions](#VAE13)
+2. [GMMs (Gaussian Mixture Models)](#GMM)
+   1. [Pure GMM](#GMM21)
+   2. [AE and GMM](#GMM22)
+   3. [VAEs and GMM](#GMM23)
+3. [GAN (Generative adversarial network)](#GAN)
+   1. [First dense model](#GAN31)
+   2. [Second dense model](#GAN32)
+   3. [CNN model](#GAN33)
+   4. [CNN model for discriminator and dense model for the generator](#GAN34)
 
 ## VAEs
 <a name="VAE"></a>
 In the context of a Deep Unsupervised Learning course, a comparative analysis was conducted on various methods for generating images using Variational Autoencoders (VAEs). Three different approaches were explored, focusing on model architectures, latent layer size, and computational resources used during training.
 
 ### Methodology:
-<a name="Methodology"></a>
+<a name="VAE11"></a>
 Several VAE models were implemented and trained using two main types of architectures: dense layers and convolutional layers. The size of the latent layer and the number of training epochs were varied to assess their impact on the quality of generated images.
 
 ### Results:
-
+<a name="VAE12"></a>
 Dense vs. Convolutional Architecture:
 A significant difference in performance was observed between VAE models with Dense architecture and those with convolutional architecture since they are better suited for image generation in VAEs because they effectively capture visual features, require fewer parameters, and can extract complex features, resulting in more realistic and detailed images compared to dense models.
 for more details , you can access the notebook named ["VAEs CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/VAEs/VAEs%20CNN.ipynb)
@@ -69,6 +68,7 @@ Lower final loss values were observed for convolutional models compared to Dense
 
 
 ### Conclusions:
+<a name="VAE13"></a>
 The results suggest that convolutional architecture is more suitable for image generation using VAEs, as it allows for more efficient learning and higher quality generated images. Additionally, the importance of using a sufficiently large latent layer to capture the complexity of input data is highlighted. 
 
 <div align="center">
@@ -91,8 +91,9 @@ The results suggest that convolutional architecture is more suitable for image g
 </div>
 
 ## GMMs
-
+<a name="GMM"></a>
 ### Pure GMM 
+<a name="GMM21"></a>
 Initially, the approach involved setting the number of components in the GMM equal to the number of distinct labels in the FashionMNIST dataset. This method yielded relatively accurate results; however, it failed to capture all the distinct classes present in the dataset. Notably, some classes, such as t-shirts, were repeated, indicating a limitation in the model's capacity to differentiate between similar categories.
 for more details , you can access the notebook named ["GMMS.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
 
@@ -104,7 +105,7 @@ for more details , you can access the notebook named ["GMMS.ipynb"](https://gith
 </div>
 
 ### AE and GMM
-
+<a name="GMM22"></a>
 This second approach combines the power of autoencoders (AE) and Gaussian Mixture Models (GMMs) to generate synthetic images resembling the FashionMNIST dataset. The process starts with training a convolutional autoencoder (CAE) on the FashionMNIST dataset, aiming to learn a compact representation of the input images in a latent space. The trained CAE's encoder part is then utilized to extract latent vectors from the FashionMNIST dataset. Subsequently, a range of components for the GMM is explored, evaluating the Bayesian Information Criterion (BIC) score for each component count to determine the optimal number of clusters. This step is crucial for selecting the most suitable configuration of the GMM for capturing the underlying distribution of the latent vectors effectively.
 for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/GMMS.ipynb)
 <div align="center">
@@ -135,7 +136,7 @@ After identifying the optimal number of components, in this case, 18, the GMM is
 </div>
 
 ### VAEs and GMM
-
+<a name="GMM23"></a>
 we maintain the essence of the previous strategy, but instead of using a standard autoencoder (AE), we adopt a Variational Autoencoder (VAE). VAEs offer a probabilistic interpretation of latent space by modeling the latent variables as probability distributions. This probabilistic framework allows for more flexible and robust latent space representations, potentially resulting in improved generation quality and diversity compared to traditional autoencoders.
 
 The workflow remains largely consistent with the previous approach. First, we train a Variational Autoencoder on the FashionMNIST dataset to learn a compact and structured latent representation. Unlike conventional autoencoders, VAEs learn to encode data into latent variables that follow a predefined probability distribution, typically a Gaussian distribution. Consequently, the latent space captures both the mean and variance of each latent variable, enabling more nuanced and expressive representations of the input data.
@@ -163,10 +164,10 @@ for more details , you can access the notebook named ["VAEs CNN GMMs.ipynb"](htt
 
 
 ## GAN
-
+<a name="GAN"></a>
 
 ### First dense model
-<a name="First dense model"></a>
+<a name="GAN31"></a>
     
 
 
@@ -184,7 +185,7 @@ for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipy
 
 
 ### Second dense model
-
+<a name="GAN32"></a>
 
 The second dense model also has three hidden layers but with decreasing sizes: 256, 128, and 64. It uses the same LeakyReLU activation function but incorporates dropout with a probability of 50%, introducing regularization to help prevent overfitting. It similarly concludes with a single linear layer with Sigmoid activation for the output. This model is less complex due to smaller hidden layers, meaning it has fewer parameters to learn.
 
@@ -197,7 +198,7 @@ for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_2.ipy
 </div>
 
 ### CNN model for discriminator and dense model for the generator
-
+<a name="GAN33"></a>
 The generator is designed with a noise input dimension of 100, an initial dense layer, and a combination of upsampling and convolutional layers that expand the noise into a 2D structure. The use of ReLU and Tanh activation functions facilitates the learning of complex patterns. This model is more sophisticated due to convolutional and upsampling layers, allowing it to create finer details, which can be crucial for generating realistic Fashion MNIST images.
 
 For the discriminator, the model processes input images through multiple convolutional layers with LeakyReLU activations and employs dropout to prevent overfitting. The complexity is higher due to more channels in convolutions, which might provide better feature extraction for classifying real versus generated images.
@@ -212,7 +213,7 @@ for more details , you can access the notebook named ["GAN_G_CNN_D_CNN.ipynb"](h
 </div>
 
 ### CNN model for discriminator and dense model for the generator 
-
+<a name="GAN34"></a>
 The generator also starts with a noise input dimension of 100 and an initial linear layer, but it lacks the convolutional and upsampling complexity of the first, relying solely on linear layers. It uses LeakyReLU and Tanh activations, and its simplicity with only linear layers means it’s likely faster to train but may produce less detailed images.
 
 The discriminator model has a similar structure but with fewer channels, making it less complex and possibly quicker to train. Reduced convolution channels might limit its feature detection capability but improve generalization due to a simpler model. Both use Sigmoid in the output layer for binary classification.
