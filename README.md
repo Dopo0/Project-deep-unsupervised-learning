@@ -12,6 +12,79 @@ This project is an evaluate generation images from noise of three different meth
    4. [CNN model for discriminator and dense model for the generator](#CNN model for discriminator and dense model for the generator)
 
 
+## VAEs
+
+In the context of a Deep Unsupervised Learning course, a comparative analysis was conducted on various methods for generating images using Variational Autoencoders (VAEs). Three different approaches were explored, focusing on model architectures, latent layer size, and computational resources used during training.
+
+Methodology:
+Several VAE models were implemented and trained using two main types of architectures: dense layers and convolutional layers. The size of the latent layer and the number of training epochs were varied to assess their impact on the quality of generated images.
+
+Results:
+
+Dense vs. Convolutional Architecture:
+A significant difference in performance was observed between VAE models with Dense architecture and those with convolutional architecture since they are better suited for image generation in VAEs because they effectively capture visual features, require fewer parameters, and can extract complex features, resulting in more realistic and detailed images compared to dense models.
+for more details , you can access the notebook named ["VAEs CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+
+
+
+<div align="center">
+  <img src="VAEs/Results/CNN_comparative.png" alt="Results of CNN" width="440" height="180">
+  <br>
+  <em>Figure: Results of the CNN model Fashion MNIST dataset after 15 epochs</em>
+</div>
+
+Latent Layer Size:
+Increasing the size of the latent layer from 8 to 64 resulted in significant improvements in the quality of generated images.
+This suggests that a larger latent layer enables a richer and more expressive latent representation.
+for more details , you can access the notebooks named ["VAEs_Dense_Latent_8.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb) and ["VAEs_Dense_Latent_64.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+
+
+<div align="center">
+  <img src="VAEs/Results/Dense_Latent_8_comparative.png" alt="Results of Dense" width="440" height="180">
+  <br>
+  <em>Figure: Results of the Dense model with latent dimension 8 on Fashion MNIST dataset after 30 epochs</em>
+</div>
+
+<div align="center">
+  <img src="VAEs/Results/Dense_Latent_64_comparative.png" alt="Results of Dense" width="440" height="180">
+  <br>
+  <em>Figure: Results of the Dense model with latent dimension 64 on Fashion MNIST dataset after 30 epochs</em>
+</div>
+
+Learning Efficiency:
+VAE models with convolutional architecture exhibited significantly lower initial loss compared to Dense models.
+This indicates greater efficiency in learning representations from the beginning of training.
+
+
+Comparison of Final Loss:
+The final loss of VAE models with dense and convolutional layers was evaluated.
+Lower final loss values were observed for convolutional models compared to Dense models, indicating better convergence during training.
+
+
+Conclusions:
+The results suggest that convolutional architecture is more suitable for image generation using VAEs, as it allows for more efficient learning and higher quality generated images. Additionally, the importance of using a sufficiently large latent layer to capture the complexity of input data is highlighted. 
+
+<div align="center">
+  <img src="VAEs/Results/Dense_Latent_8_sample.png" alt="Results of Dense" width="440" height="50">
+  <br>
+  <em>Figure: Results of the Dense model with latent dimension 8 from random noise on Fashion MNIST dataset after 30 epochs</em>
+</div>
+
+
+<div align="center">
+  <img src="VAEs/Results/Dense_Latent_64_sample.png" alt="Results of Dense" width="440" height="50">
+  <br>
+  <em>Figure: Results of the Dense model with latent dimension 64 from random noise on Fashion MNIST dataset after 30 epochs</em>
+</div>
+
+<div align="center">
+  <img src="VAEs/Results/CNN_sample.png" alt="Results of CNN" width="440" height="50">
+  <br>
+  <em>Figure: Results of the CNN model from random noise on Fashion MNIST dataset after 15 epochs</em>
+</div>
+
+
+
 ## GAN
 
 
@@ -19,7 +92,9 @@ This project is an evaluate generation images from noise of three different meth
 
     
 
-The first linear model has three hidden layers with a progressively increasing number of neurons: 256, 512, and 1024. It uses LeakyReLU activation function, which allows for a small, non-zero gradient when the unit is not active. This model does not employ dropout, which means it may be more prone to overfitting compared to a model that does. The output is generated through a single linear layer with Sigmoid activation, which is typical for binary classification. Due to the larger hidden layers, it has more parameters, making it more complex.
+
+The first dense model has three hidden layers with a progressively increasing number of neurons: 256, 512, and 1024. It uses LeakyReLU activation function, which allows for a small, non-zero gradient when the unit is not active. This model does not employ dropout, which means it may be more prone to overfitting compared to a model that does. The output is generated through a single linear layer with Sigmoid activation, which is typical for binary classification. Due to the larger hidden layers, it has more parameters, making it more complex.
+
 
 for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
 <div align="center">
@@ -33,7 +108,9 @@ for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipy
 
 ### Second dense model
 
-The second linear model also has three hidden layers but with decreasing sizes: 256, 128, and 64. It uses the same LeakyReLU activation function but incorporates dropout with a probability of 50%, introducing regularization to help prevent overfitting. It similarly concludes with a single linear layer with Sigmoid activation for the output. This model is less complex due to smaller hidden layers, meaning it has fewer parameters to learn.
+
+The second dense model also has three hidden layers but with decreasing sizes: 256, 128, and 64. It uses the same LeakyReLU activation function but incorporates dropout with a probability of 50%, introducing regularization to help prevent overfitting. It similarly concludes with a single linear layer with Sigmoid activation for the output. This model is less complex due to smaller hidden layers, meaning it has fewer parameters to learn.
+
 
 for more details , you can access the notebook named "GAN_G_Dense_D_Dense_2.ipynb"
 <div align="center">
@@ -65,7 +142,8 @@ The discriminator model has a similar structure but with fewer channels, making 
 
 The results are evidently not desirable as the images consist of unrecognizable, noisy patterns. This indicates that the linear generator in the GAN was unable to capture and reproduce the complexities of the data it was trained on, which in this case would be Fashion MNIST images.
 
-The poor performance could be due to the imbalance between the capabilities of the generator and the discriminator. The discriminator, being a convolutional neural network (CNN), likely has a far greater ability to distinguish between real and fake images than the linear generator has to generate plausible images. Thus, the generator fails to create convincing images to fool the discriminator, resulting in it not learning meaningful features.
+The poor performance could be due to the imbalance between the capabilities of the generator and the discriminator. The discriminator, being a convolutional neural network (CNN), likely has a far greater ability to distinguish between real and fake images than the dense generator has to generate plausible images. Thus, the generator fails to create convincing images to fool the discriminator, resulting in it not learning meaningful features.
+
 
 for more details , you can access the notebook named "GAN_G_Dense_D_CNN.ipynb"
 
