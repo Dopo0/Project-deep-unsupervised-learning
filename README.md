@@ -3,8 +3,8 @@ This project is an evaluate generation images from noise of three different meth
 
 
 ## Table of contents
-1. VAE (Variational Autoencoders)
-   1. Methodology
+1. [VAE (Variational Autoencoders)](#VAE)
+   1. [Methodology](#Methodology)
    2. Results
    3. Conclusions
 2. GMMs (Gaussian Mixture Models)
@@ -19,18 +19,18 @@ This project is an evaluate generation images from noise of three different meth
 
 
 ## VAEs
-
+<a name="VAE"></a>
 In the context of a Deep Unsupervised Learning course, a comparative analysis was conducted on various methods for generating images using Variational Autoencoders (VAEs). Three different approaches were explored, focusing on model architectures, latent layer size, and computational resources used during training.
 
 ### Methodology:
+<a name="Methodology"></a>
 Several VAE models were implemented and trained using two main types of architectures: dense layers and convolutional layers. The size of the latent layer and the number of training epochs were varied to assess their impact on the quality of generated images.
 
 ### Results:
 
 Dense vs. Convolutional Architecture:
 A significant difference in performance was observed between VAE models with Dense architecture and those with convolutional architecture since they are better suited for image generation in VAEs because they effectively capture visual features, require fewer parameters, and can extract complex features, resulting in more realistic and detailed images compared to dense models.
-for more details , you can access the notebook named ["VAEs CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
-
+for more details , you can access the notebook named ["VAEs CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/VAEs/VAEs%20CNN.ipynb)
 
 
 <div align="center">
@@ -42,7 +42,8 @@ for more details , you can access the notebook named ["VAEs CNN.ipynb"](https://
 Latent Layer Size:
 Increasing the size of the latent layer from 8 to 64 resulted in significant improvements in the quality of generated images.
 This suggests that a larger latent layer enables a richer and more expressive latent representation.
-for more details , you can access the notebooks named ["VAEs_Dense_Latent_8.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb) and ["VAEs_Dense_Latent_64.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+for more details , you can access the notebooks named ["VAEs_Dense_Latent_8.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/VAEs/VAEs_Dense_Latent_8.ipynb) 
+and ["VAEs_Dense_Latent_64.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/VAEs/VAEs_Dense_Latent_64.ipynb)
 
 
 <div align="center">
@@ -105,7 +106,7 @@ for more details , you can access the notebook named ["GMMS.ipynb"](https://gith
 ### AE and GMM
 
 This second approach combines the power of autoencoders (AE) and Gaussian Mixture Models (GMMs) to generate synthetic images resembling the FashionMNIST dataset. The process starts with training a convolutional autoencoder (CAE) on the FashionMNIST dataset, aiming to learn a compact representation of the input images in a latent space. The trained CAE's encoder part is then utilized to extract latent vectors from the FashionMNIST dataset. Subsequently, a range of components for the GMM is explored, evaluating the Bayesian Information Criterion (BIC) score for each component count to determine the optimal number of clusters. This step is crucial for selecting the most suitable configuration of the GMM for capturing the underlying distribution of the latent vectors effectively.
-for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/GMMS.ipynb)
 <div align="center">
   <img src="GMMs/results/AE_training_epochs.png" alt="Loss over epochs" width="250" height="250">
   <img src="GMMs/results/best_componet.png" alt="BIC scores" width="250" height="250">
@@ -158,15 +159,14 @@ we sample latent vectors from the learned distribution of the GMM and decode the
 </div>
 
 Overall, by incorporating Variational Autoencoders into the generation pipeline, we aim to enhance the quality and diversity of the generated images while maintaining the interpretability and structure of the latent space. This approach represents a sophisticated fusion of generative modeling techniques, leveraging the strengths of both VAEs and GMMs to generate realistic synthetic data resembling the FashionMNIST dataset.
-for more details , you can access the notebook named ["VAEs CNN GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
-
+for more details , you can access the notebook named ["VAEs CNN GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/VAEs%20CNN%20GMMs.ipynb)
 
 
 ## GAN
 
 
 ### First dense model
-
+<a name="First dense model"></a>
     
 
 
@@ -189,7 +189,7 @@ for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipy
 The second dense model also has three hidden layers but with decreasing sizes: 256, 128, and 64. It uses the same LeakyReLU activation function but incorporates dropout with a probability of 50%, introducing regularization to help prevent overfitting. It similarly concludes with a single linear layer with Sigmoid activation for the output. This model is less complex due to smaller hidden layers, meaning it has fewer parameters to learn.
 
 
-for more details , you can access the notebook named "GAN_G_Dense_D_Dense_2.ipynb"
+for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_2.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_2.ipynb)
 <div align="center">
   <img src="GAN/results_GAN/Second_dense_model_150_epochs.png" alt="Results of Second Dense GAN Model after 150 Epochs" width="250" height="260">
   <br>
@@ -204,7 +204,7 @@ For the discriminator, the model processes input images through multiple convolu
 
 The model with a convolutional generator yielded better results due to a more balanced power dynamic between the discriminator and the generator. Both components of the GAN would be more evenly matched in their capacity to analyze and generate images, leading to more coherent and recognizable outputs. This highlights the importance of designing both the generator and discriminator in a GAN with compatible complexities to achieve high-quality generation of images.
 
-for more details , you can access the notebook named "GAN_G_CNN_D_CNN.ipynb"
+for more details , you can access the notebook named ["GAN_G_CNN_D_CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_CNN_D_CNN.ipynb)
 <div align="center">
   <img src="GAN/results_GAN/GAN_CNN.png" alt="Results of Second Dense GAN Model after 150 Epochs" width="250" height="260">
   <br>
@@ -222,7 +222,7 @@ The results are evidently not desirable as the images consist of unrecognizable,
 The poor performance could be due to the imbalance between the capabilities of the generator and the discriminator. The discriminator, being a convolutional neural network (CNN), likely has a far greater ability to distinguish between real and fake images than the dense generator has to generate plausible images. Thus, the generator fails to create convincing images to fool the discriminator, resulting in it not learning meaningful features.
 
 
-for more details , you can access the notebook named "GAN_G_Dense_D_CNN.ipynb"
+for more details , you can access the notebook named ["GAN_G_Dense_D_CNN.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_CNN.ipynb)
 
 <div align="center">
   <img src="GAN/results_GAN/Second_CNN_Dense_model_150_epochs.png" alt="Results of Second Dense GAN Model after 150 Epochs" width="250" height="260">
