@@ -11,6 +11,7 @@ This project is an evaluate generation images from noise of three different meth
    3. [CNN model](#CNN model)
    4. [CNN model for discriminator and dense model for the generator](#CNN model for discriminator and dense model for the generator)
 
+
 ## VAEs
 
 In the context of a Deep Unsupervised Learning course, a comparative analysis was conducted on various methods for generating images using Variational Autoencoders (VAEs). Three different approaches were explored, focusing on model architectures, latent layer size, and computational resources used during training.
@@ -84,14 +85,6 @@ The results suggest that convolutional architecture is more suitable for image g
 
 
 
-
-
-
-
-
-
-
-
 ## GAN
 
 
@@ -99,7 +92,9 @@ The results suggest that convolutional architecture is more suitable for image g
 
     
 
+
 The first dense model has three hidden layers with a progressively increasing number of neurons: 256, 512, and 1024. It uses LeakyReLU activation function, which allows for a small, non-zero gradient when the unit is not active. This model does not employ dropout, which means it may be more prone to overfitting compared to a model that does. The output is generated through a single linear layer with Sigmoid activation, which is typical for binary classification. Due to the larger hidden layers, it has more parameters, making it more complex.
+
 
 for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
 <div align="center">
@@ -113,7 +108,9 @@ for more details , you can access the notebook named ["GAN_G_Dense_D_Dense_1.ipy
 
 ### Second dense model
 
+
 The second dense model also has three hidden layers but with decreasing sizes: 256, 128, and 64. It uses the same LeakyReLU activation function but incorporates dropout with a probability of 50%, introducing regularization to help prevent overfitting. It similarly concludes with a single linear layer with Sigmoid activation for the output. This model is less complex due to smaller hidden layers, meaning it has fewer parameters to learn.
+
 
 for more details , you can access the notebook named "GAN_G_Dense_D_Dense_2.ipynb"
 <div align="center">
@@ -146,6 +143,7 @@ The discriminator model has a similar structure but with fewer channels, making 
 The results are evidently not desirable as the images consist of unrecognizable, noisy patterns. This indicates that the linear generator in the GAN was unable to capture and reproduce the complexities of the data it was trained on, which in this case would be Fashion MNIST images.
 
 The poor performance could be due to the imbalance between the capabilities of the generator and the discriminator. The discriminator, being a convolutional neural network (CNN), likely has a far greater ability to distinguish between real and fake images than the dense generator has to generate plausible images. Thus, the generator fails to create convincing images to fool the discriminator, resulting in it not learning meaningful features.
+
 
 for more details , you can access the notebook named "GAN_G_Dense_D_CNN.ipynb"
 
