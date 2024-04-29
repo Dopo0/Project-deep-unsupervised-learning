@@ -95,7 +95,7 @@ The results suggest that convolutional architecture is more suitable for image g
 ### Pure GMM 
 <a name="GMM21"></a>
 Initially, the approach involved setting the number of components in the GMM equal to the number of distinct labels in the FashionMNIST dataset. This method yielded relatively accurate results; however, it failed to capture all the distinct classes present in the dataset. Notably, some classes, such as t-shirts, were repeated, indicating a limitation in the model's capacity to differentiate between similar categories.
-for more details , you can access the notebook named ["GMMS.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GAN/GAN_G_Dense_D_Dense_1.ipynb)
+for more details , you can access the notebook named ["GMMS.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/GMMS.ipynb)
 
 
 <div align="center">
@@ -107,7 +107,7 @@ for more details , you can access the notebook named ["GMMS.ipynb"](https://gith
 ### AE and GMM
 <a name="GMM22"></a>
 This second approach combines the power of autoencoders (AE) and Gaussian Mixture Models (GMMs) to generate synthetic images resembling the FashionMNIST dataset. The process starts with training a convolutional autoencoder (CAE) on the FashionMNIST dataset, aiming to learn a compact representation of the input images in a latent space. The trained CAE's encoder part is then utilized to extract latent vectors from the FashionMNIST dataset. Subsequently, a range of components for the GMM is explored, evaluating the Bayesian Information Criterion (BIC) score for each component count to determine the optimal number of clusters. This step is crucial for selecting the most suitable configuration of the GMM for capturing the underlying distribution of the latent vectors effectively.
-for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/GMMS.ipynb)
+for more details , you can access the notebook named ["AE_GMMs.ipynb"](https://github.com/Dopo0/Project-deep-unsupervised-learning/blob/main/GMMs/AE_GMMs.ipynb)
 <div align="center">
   <img src="GMMs/results/AE_training_epochs.png" alt="Loss over epochs" width="250" height="250">
   <img src="GMMs/results/best_componet.png" alt="BIC scores" width="250" height="250">
