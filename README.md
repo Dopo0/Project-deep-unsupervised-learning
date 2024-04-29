@@ -5,7 +5,10 @@ This project is an evaluate generation images from noise of three different meth
 # Table of contents
 1. GMM
 2. AE
-3. GAN
+   1. Methodology
+   2. Results
+   3. Conclusions
+4. GAN
    1. [First dense model](#First dense model)
    2. [Second dense model](#Second dense model)
    3. [CNN model](#CNN model)
@@ -16,10 +19,10 @@ This project is an evaluate generation images from noise of three different meth
 
 In the context of a Deep Unsupervised Learning course, a comparative analysis was conducted on various methods for generating images using Variational Autoencoders (VAEs). Three different approaches were explored, focusing on model architectures, latent layer size, and computational resources used during training.
 
-Methodology:
+### Methodology:
 Several VAE models were implemented and trained using two main types of architectures: dense layers and convolutional layers. The size of the latent layer and the number of training epochs were varied to assess their impact on the quality of generated images.
 
-Results:
+### Results:
 
 Dense vs. Convolutional Architecture:
 A significant difference in performance was observed between VAE models with Dense architecture and those with convolutional architecture since they are better suited for image generation in VAEs because they effectively capture visual features, require fewer parameters, and can extract complex features, resulting in more realistic and detailed images compared to dense models.
@@ -61,7 +64,7 @@ The final loss of VAE models with dense and convolutional layers was evaluated.
 Lower final loss values were observed for convolutional models compared to Dense models, indicating better convergence during training.
 
 
-Conclusions:
+### Conclusions:
 The results suggest that convolutional architecture is more suitable for image generation using VAEs, as it allows for more efficient learning and higher quality generated images. Additionally, the importance of using a sufficiently large latent layer to capture the complexity of input data is highlighted. 
 
 <div align="center">
